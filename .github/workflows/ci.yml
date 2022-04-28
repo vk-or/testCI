@@ -16,5 +16,5 @@ jobs:
       - uses: actions/setup-go@v2
         with:
           go-version: 1.18
-      - name: Install tools used in the next steps
+      - name: Go get
         run: go get github.com/cryptoriums/test@main
