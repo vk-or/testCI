@@ -1,0 +1,19 @@
+name: 'release to accounts'
+
+on:
+  workflow_run:
+    workflows: ["terraform-pre-prerequisites"]
+    types:
+      - completed
+
+jobs:
+  plan-and-apply:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    name: Terraform - Plan/Apply on Accounts
+    container: hashicorp/terraform
+    steps:
+       - name: Checkout
+          uses: actions/checkout@v2
+          with:
+             ref: ${{ github.event.workflow_run.head_branch }}
