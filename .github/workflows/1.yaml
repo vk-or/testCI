@@ -1,0 +1,25 @@
+name: 'terraform-pre-prerequisites'
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  changelog:
+    runs-on: ubuntu-latest
+    name: Check changelog
+    steps: 
+      - name: Checkout repo
+        uses: actions/checkout@v2
+        
+      - name: Check Changelog file
+        id: changelog_changes
+        uses: technote-space/get-diff-action@1aaa6d33ff408745dd063b237974d19557814040
+        with:
+          PATTERNS: |
+            **/CHANGELOG.md
